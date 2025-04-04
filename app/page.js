@@ -1,112 +1,170 @@
 import Image from "next/image";
+import PriceBenefitsItem from "@/components/price-benefits-item";
+import productDemo from "@/public/ctalyst-hero.png";
+import FAQItem from "@/components/faq-item";
 
 export default function Home() {
+  const freePlanBenefits = [
+    "Up to 5 links per month",
+    "Basic CTA Customization",
+    "Unlimited Link Sharing",
+    "Responsive CTA Overlays",
+    "No Credit Card Required",
+  ];
+
+  const proPlanBenefits = [
+    "Unlimited CTA Links – No restrictions",
+    "Advanced CTA Customization",
+    "Custom Branded Links",
+    "Priority Support",
+  ];
+
+  const faq = [
+    {
+      question: "How does the free plan work?",
+      answer:
+        "The free plan allows you to create up to 5 links per month with basic analytics.",
+    },
+    {
+      question: "Can I cancel my subscription anytime?",
+      answer:
+        "Yes! You can cancel your subscription at any time with no hidden fees.",
+    },
+    { question: "I have another question", answer: "Loreum Ipseum" },
+  ];
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.js</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+    <main>
+      <div className="min-h-screen text-black">
+        {/* Header */}
+        <header className="w-full py-4 px-6 flex justify-between items-center shadow-md">
+          <Image src="/logo.png" width={184} height={49} alt="CTAlyst logo" />
+          <div className="space-x-4 flex">
+            <div className="space-x-4 max-md:hidden flex items-center">
+              <a className="link link-hover" href="#pricing">
+                Pricing
+              </a>
+              <a className="link link-hover" href="#faq">
+                FAQ
+              </a>
+            </div>
+            <button className="btn bg-[#5DA2D5] hover:bg-[#5294c6] text-white">
+              Sign In
+            </button>
+          </div>
+        </header>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+        {/* Hero */}
+        <section className="py-32 px-8 bg-[#90CCF4] text-white flex flex-col lg:flex-row justify-center items-center lg:items-start gap-12">
+          <div className="text-center lg:text-left max-w-2xl lg:max-w-xl ">
+            <h1 className="text-5xl font-bold animate-fadeInDown">
+              The catalyst for better link conversions
+            </h1>
+            <p className="text-lg mt-4 max-w-2xl animate-fadeInUp">
+              Add CTAs to YouTube videos & share!. Drive engagement and
+              conversions seamlessly.
+            </p>
+            <button className="btn bg-[#F78888] hover:bg-[#e37d7d] border-none mt-6 text-white px-6 py-3">
+              Get Started
+            </button>
+          </div>
+          <Image
+            src={productDemo}
+            alt="Product demo"
+            className="w-[450px] rounded-xl"
+          />
+        </section>
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
+        {/* Features */}
+        <section className="py-32 px-8 bg-white">
+          <h2 className="text-3xl font-bold text-center mb-8">
+            Why Use Our Service?
           </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="p-6 bg-[#F3D250] text-black rounded-lg shadow-md text-center">
+              <h3 className="text-xl font-bold">Easy to Use</h3>
+              <p>Create links with CTAs in seconds.</p>
+            </div>
+            <div className="p-6 bg-[#90CCF4] text-black rounded-lg shadow-md text-center">
+              <h3 className="text-xl font-bold">Boost Engagement</h3>
+              <p>Drive more conversions with CTA overlays.</p>
+            </div>
+            <div className="p-6 bg-[#F78888] text-black rounded-lg shadow-md text-center">
+              <h3 className="text-xl font-bold">Track Performance</h3>
+              <p>Monitor link analytics easily.</p>
+            </div>
+          </div>
+        </section>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
+        {/* Pricing */}
+        <section id="pricing" className="py-32 px-8 bg-[#ECECEC]">
+          <h2 className="text-3xl font-bold mb-6 text-center">
+            Choose Your Plan
           </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            <div className="p-6 bg-white rounded-lg shadow-md space-y-6 min-w-96 mx-auto md:min-w-0 md:mx-0">
+              <div className="space-y-3">
+                <h3 className="text-2xl font-bold">Free</h3>
+                <div className="flex gap-1">
+                  <span className="text-2xl font-black align-top">$</span>
+                  <span className="text-5xl font-black">0</span>
+                  <div className="text-xs font-medium opacity-60 self-end flex flex-col">
+                    <span className="uppercase">usd/</span>
+                    <span>month</span>
+                  </div>
+                </div>
+                <p>Create your first links!</p>
+              </div>
+              <button className="btn bg-[#5DA2D5] hover:bg-[#5294c6] text-white mt-4 w-full">
+                Get Started
+              </button>
+              <ul className="space-y-2">
+                {freePlanBenefits.map((benefit) => (
+                  <PriceBenefitsItem key={benefit}>{benefit}</PriceBenefitsItem>
+                ))}
+              </ul>
+            </div>
+            <div className="p-6 bg-[#F3D250] rounded-lg shadow-md space-y-6 min-w-96 mx-auto md:min-w-0 md:mx-0">
+              <div className="space-y-3">
+                <h3 className="text-2xl font-bold">Pro</h3>
+                <div className="flex gap-1">
+                  <span className="text-2xl font-black self-start">$</span>
+                  <span className="text-5xl font-black">5</span>
+                  <div className="text-xs font-medium opacity-60 self-end flex flex-col">
+                    <span className="uppercase">usd/</span>
+                    <span>month</span>
+                  </div>
+                </div>
+                <p>Boost your traffic by going PRO!</p>
+              </div>
+              <button className="btn bg-[#F78888] hover:bg-[#e37d7d] border-none text-white mt-4 w-full">
+                Upgrade Now
+              </button>
+              <ul className="space-y-2">
+                {proPlanBenefits.map((benefit) => (
+                  <PriceBenefitsItem key={benefit}>{benefit}</PriceBenefitsItem>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
+        {/* FAQ */}
+        <section id="faq" className="py-32 px-8 bg-white">
+          <h2 className="text-3xl font-bold text-center mb-8">
+            Frequently Asked Questions
           </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
+          <ul className="max-w-3xl mx-auto space-y-4">
+            {faq.map((qa) => (
+              <FAQItem key={qa.question} qa={qa} />
+            ))}
+          </ul>
+        </section>
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+        {/* Footer */}
+        <footer className="py-6 bg-[#5DA2D5] text-center text-white">
+          <p>© 2025 CTAlyst. All rights reserved.</p>
+        </footer>
       </div>
     </main>
   );
