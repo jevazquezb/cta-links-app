@@ -4,23 +4,22 @@ import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-const ButtonCheckout = () => {
+const ButtonPortal = () => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubscribe = async () => {
+  const handleBilling = async () => {
     if (isLoading) return;
 
     setIsLoading(true);
 
     try {
-      const response = await axios.post("/api/billing/create-checkout", {
-        successUrl: window.location.href + "/success",
-        cancelUrl: window.location.href,
+      const response = await axios.post("/api/billing/create-portal", {
+        returnUrl: window.location.href,
       });
 
-      const checkoutUrl = response.data.url;
+      const portalUrl = response.data.url;
 
-      window.location.href = checkoutUrl;
+      window.location.href = portalUrl;
     } catch (error) {
       const errorMessage =
         error.response?.data?.error || error.message || "Something went wrong";
@@ -33,14 +32,14 @@ const ButtonCheckout = () => {
   return (
     <button
       className="btn bg-[#5DA2D5] hover:bg-[#5294c6] text-white"
-      onClick={handleSubscribe}
+      onClick={handleBilling}
     >
       {isLoading && (
         <span className="loading loading-spinner loading-xs"></span>
       )}
-      Subscribe
+      Billing
     </button>
   );
 };
 
-export default ButtonCheckout;
+export default ButtonPortal;

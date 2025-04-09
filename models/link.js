@@ -7,11 +7,6 @@ const linkSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    // ctaId: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: "CTA",
-    //   required: true,
-    // },
     videoUrl: {
       type: String,
       required: true,

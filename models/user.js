@@ -13,12 +13,7 @@ const userSchema = new mongoose.Schema({
   image: {
     type: String,
   },
-  // plan: {
-  //   type: String,
-  //   enum: ["free", "pro"],
-  //   default: "free",
-  // },
-  isUserPro: {
+  isPro: {
     type: Boolean,
     default: false,
   },

@@ -33,12 +33,12 @@ export async function POST(req) {
 
     const user = await User.findById(session.user?.id);
 
-    // // if (!user.hasAccess) {
-    // //   return NextResponse.json(
-    // //     { error: "Please subscribe first." },
-    // //     { status: 403 }
-    // //   );
-    // // }
+    if (!user.isPro && user.links?.length > 2) {
+      return NextResponse.json(
+        { error: "Please subscribe first." },
+        { status: 403 }
+      );
+    }
 
     const link = await Link.create({
       userId: user._id,
@@ -80,12 +80,12 @@ export async function DELETE(req) {
 
     const user = await User.findById(session.user?.id);
 
-    // if (!user.hasAccess) {
-    //   return NextResponse.json(
-    //     { error: "Please subscribe first." },
-    //     { status: 403 }
-    //   );
-    // }
+    if (!user.isPro) {
+      return NextResponse.json(
+        { error: "Please subscribe first." },
+        { status: 403 }
+      );
+    }
 
     await Link.deleteOne({
       _id: linkId,
@@ -137,6 +137,15 @@ export async function PUT(req) {
       return NextResponse.json({ error: "Not authorized." }, { status: 401 });
     }
 
+    const user = await User.findById(session.user?.id);
+
+    if (!user.isPro) {
+      return NextResponse.json(
+        { error: "Please subscribe first." },
+        { status: 403 }
+      );
+    }
+
     // Connect to the database
     await connectMongo();
 
@@ -146,7 +155,6 @@ export async function PUT(req) {
       { videoUrl, cta: { message, buttonLabel, buttonUrl } },
       { new: true } // Return the updated document
     );
-    console.log("Updated CTA:", updatedCTA);
 
     if (!updatedCTA) {
       return NextResponse.json({ error: "CTA not found" }, { status: 404 });

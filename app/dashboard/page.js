@@ -8,6 +8,7 @@ import ButtonCheckout from "@/components/button-checkout";
 import ButtonDeleteLink from "@/components/button-delete-link";
 import ButtonCopyLink from "@/components/button-copy-link";
 import ButtonEditLink from "@/components/button-edit-link";
+import ButtonPortal from "@/components/button-portal";
 
 export default function Dashboard() {
   const [user, setUser] = useState(null);
@@ -30,9 +31,17 @@ export default function Dashboard() {
     fetchUser();
   }, []);
 
+  const openForm = () => {
+    document.getElementById("my_modal_2").showModal();
+  };
+
+  const closeForm = () => {
+    document.getElementById("my_modal_2").close();
+  };
+
   const handleCreate = () => {
     setEditingCTA(null);
-    document.getElementById("my_modal_2").showModal();
+    openForm();
   };
 
   const handleNewCTA = (newLink) => {
@@ -40,8 +49,6 @@ export default function Dashboard() {
       ...prev,
       links: [...prev.links, newLink],
     }));
-
-    document.getElementById("my_modal_2").close();
   };
 
   const linkStr = (slug) =>
@@ -66,12 +73,12 @@ export default function Dashboard() {
       ),
     }));
     setEditingCTA(null);
-    document.getElementById("my_modal_2").close();
+    // document.getElementById("my_modal_2").close();
   };
 
   const handleEdit = (link) => {
     setEditingCTA({ ...link });
-    document.getElementById("my_modal_2").showModal();
+    openForm();
   };
 
   if (loading) {
@@ -86,7 +93,7 @@ export default function Dashboard() {
     <div className="min-h-screen bg-[#ECECEC] text-gray-800">
       <header className="bg-white shadow-md">
         <div className="flex justify-between items-center p-6 max-w-5xl mx-auto">
-          <ButtonCheckout />
+          {user?.isPro ? <ButtonPortal /> : <ButtonCheckout />}
           <ButtonLogout />
         </div>
       </header>
@@ -123,11 +130,15 @@ export default function Dashboard() {
                   </td>
                   <td className="px-4 py-2 text-center space-x-2">
                     <ButtonCopyLink linkStr={linkStr(link.slug)} />
-                    <ButtonEditLink onClick={() => handleEdit(link)} />
-                    <ButtonDeleteLink
-                      linkId={`${link._id}`}
-                      onDelete={() => handleDelete(link._id)}
-                    />
+                    {user?.isPro && (
+                      <>
+                        <ButtonEditLink onClick={() => handleEdit(link)} />
+                        <ButtonDeleteLink
+                          linkId={`${link._id}`}
+                          onDelete={() => handleDelete(link._id)}
+                        />
+                      </>
+                    )}
                   </td>
                 </tr>
               ))}
@@ -141,6 +152,7 @@ export default function Dashboard() {
           <FormCTA
             onSubmit={handleNewCTA}
             onUpdate={handleUpdateCTA}
+            onClose={closeForm}
             initialData={editingCTA}
           />
         </div>

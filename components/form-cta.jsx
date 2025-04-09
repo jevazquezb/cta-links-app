@@ -4,7 +4,12 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-export default function FormCTA({ onSubmit, onUpdate, initialData = null }) {
+export default function FormCTA({
+  onSubmit,
+  onUpdate,
+  onClose,
+  initialData = null,
+}) {
   const [formData, setFormData] = useState({
     videoUrl: "",
     message: "",
@@ -81,6 +86,7 @@ export default function FormCTA({ onSubmit, onUpdate, initialData = null }) {
       toast.error(errorMessage);
     } finally {
       setIsLoading(false);
+      onClose(); // Close the modal after submission
     }
   };
 
