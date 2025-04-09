@@ -48,7 +48,7 @@ export default function Dashboard() {
     `${
       process.env.NODE_ENV === "development"
         ? "http://localhost:3000"
-        : "https://zappyvid.com/"
+        : "https://zappyvid.com"
     }/link/${slug}`;
 
   const handleDelete = (linkId) => {
