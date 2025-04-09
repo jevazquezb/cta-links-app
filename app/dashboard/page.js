@@ -94,7 +94,8 @@ export default function Dashboard() {
       <main className="max-w-5xl mx-auto px-6 py-10">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-xl font-semibold">
-            {user?.links.length} CTA link{user?.links.length !== 1 ? "s" : ""}
+            {user?.links?.length ?? 0} CTA link
+            {user?.links?.length !== 1 ? "s" : ""}
           </h2>
           <button
             className="btn bg-[#5DA2D5] hover:bg-[#5294c6] text-white"
@@ -104,7 +105,7 @@ export default function Dashboard() {
           </button>
         </div>
 
-        {user?.links.length === 0 ? (
+        {!user?.links?.length ? (
           <p className="text-center text-gray-500">There are no CTAs.</p>
         ) : (
           <table className="w-full bg-white shadow rounded-lg overflow-hidden">
@@ -115,7 +116,7 @@ export default function Dashboard() {
               </tr>
             </thead>
             <tbody>
-              {user?.links.map((link) => (
+              {user?.links?.map((link) => (
                 <tr key={link._id} className="border-t border-gray-200">
                   <td className="px-4 py-2 w-[76%] max-w-0 truncate">
                     {linkStr(link.slug)}
