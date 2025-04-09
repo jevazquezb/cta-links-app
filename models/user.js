@@ -13,18 +13,24 @@ const userSchema = new mongoose.Schema({
   image: {
     type: String,
   },
-  plan: {
-    type: String,
-    enum: ["free", "pro"],
-    default: "free",
-  },
-  hasAccess: {
+  // plan: {
+  //   type: String,
+  //   enum: ["free", "pro"],
+  //   default: "free",
+  // },
+  isUserPro: {
     type: Boolean,
     default: false,
   },
   customerId: {
     type: String,
   },
+  links: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Link",
+    },
+  ],
 });
 
 export default mongoose.models.User || mongoose.model("User", userSchema);

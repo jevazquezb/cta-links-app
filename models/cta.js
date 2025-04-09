@@ -3,8 +3,13 @@ import mongoose from "mongoose";
 const CTASchema = new mongoose.Schema(
   {
     userId: {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "User",
+      required: true,
+    },
+    linkId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Link",
       required: true,
     },
     message: {

@@ -2,8 +2,22 @@ import Image from "next/image";
 import PriceBenefitsItem from "@/components/price-benefits-item";
 import productDemo from "@/public/ctalyst-hero.png";
 import FAQItem from "@/components/faq-item";
+import { auth } from "@/auth";
+import ButtonLogin from "@/components/button-login";
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth();
+  const isUserSubscribed = false;
+
+  const blueBtnStyles = "bg-[#5DA2D5] hover:bg-[#5294c6]";
+  const redBtnStyles = "bg-[#F78888] hover:bg-[#e37d7d] border-none";
+  const fullWidthBtn = "w-full";
+  const btnText = {
+    signIn: "Sign In",
+    getStarted: "Get Started",
+    upgradeNow: "Upgrade Now",
+  };
+
   const freePlanBenefits = [
     "Up to 5 links per month",
     "Basic CTA Customization",
@@ -48,9 +62,14 @@ export default function Home() {
                 FAQ
               </a>
             </div>
-            <button className="btn bg-[#5DA2D5] hover:bg-[#5294c6] text-white">
+            {/* <button className="btn bg-[#5DA2D5] hover:bg-[#5294c6] text-white">
               Sign In
-            </button>
+            </button> */}
+            <ButtonLogin
+              session={session}
+              text={btnText.signIn}
+              extraStyles={blueBtnStyles}
+            />
           </div>
         </header>
 
@@ -60,13 +79,18 @@ export default function Home() {
             <h1 className="text-5xl font-bold animate-fadeInDown">
               The catalyst for better link conversions
             </h1>
-            <p className="text-lg mt-4 max-w-2xl animate-fadeInUp">
+            <p className="text-lg mt-4 mb-6 max-w-2xl animate-fadeInUp">
               Add CTAs to YouTube videos & share!. Drive engagement and
               conversions seamlessly.
             </p>
-            <button className="btn bg-[#F78888] hover:bg-[#e37d7d] border-none mt-6 text-white px-6 py-3">
+            {/* <button className="btn bg-[#F78888] hover:bg-[#e37d7d] border-none px-6 py-3">
               Get Started
-            </button>
+            </button> */}
+            <ButtonLogin
+              session={session}
+              text={btnText.getStarted}
+              extraStyles={redBtnStyles}
+            />
           </div>
           <Image
             src={productDemo}
@@ -115,9 +139,17 @@ export default function Home() {
                 </div>
                 <p>Create your first links!</p>
               </div>
-              <button className="btn bg-[#5DA2D5] hover:bg-[#5294c6] text-white mt-4 w-full">
+              {/* <button className="btn bg-[#5DA2D5] hover:bg-[#5294c6] text-white mt-4 w-full">
                 Get Started
-              </button>
+              </button> */}
+              {!session && (
+                <ButtonLogin
+                  session={session}
+                  text={btnText.getStarted}
+                  extraStyles={`${blueBtnStyles} ${fullWidthBtn}`}
+                />
+              )}
+
               <ul className="space-y-2">
                 {freePlanBenefits.map((benefit) => (
                   <PriceBenefitsItem key={benefit}>{benefit}</PriceBenefitsItem>
@@ -137,9 +169,23 @@ export default function Home() {
                 </div>
                 <p>Boost your traffic by going PRO!</p>
               </div>
-              <button className="btn bg-[#F78888] hover:bg-[#e37d7d] border-none text-white mt-4 w-full">
+              {/* <button className="btn bg-[#F78888] hover:bg-[#e37d7d] border-none text-white w-full">
                 Upgrade Now
-              </button>
+              </button> */}
+              {session ? (
+                isUserSubscribed ? (
+                  ""
+                ) : (
+                  <button>Upgrade Now</button>
+                )
+              ) : (
+                <ButtonLogin
+                  session={session}
+                  text={btnText.upgradeNow}
+                  extraStyles={`${redBtnStyles} ${fullWidthBtn}`}
+                />
+              )}
+
               <ul className="space-y-2">
                 {proPlanBenefits.map((benefit) => (
                   <PriceBenefitsItem key={benefit}>{benefit}</PriceBenefitsItem>
