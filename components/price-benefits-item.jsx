@@ -5,7 +5,7 @@ const PriceBenefitsItem = ({ children }) => (
       fill="none"
       viewBox="0 0 24 24"
       strokeWidth={1.5}
-      stroke="currentColor"
+      stroke="#00de94"
       className="size-4"
     >
       <path

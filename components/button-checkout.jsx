@@ -4,7 +4,7 @@ import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-const ButtonCheckout = () => {
+const ButtonCheckout = ({ text, extraStyles }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubscribe = async () => {
@@ -32,13 +32,15 @@ const ButtonCheckout = () => {
 
   return (
     <button
-      className="btn bg-[#5DA2D5] hover:bg-[#5294c6] text-white"
+      className={`btn bg-[#5DA2D5] hover:bg-[#5294c6] text-white ${
+        extraStyles ? extraStyles : ""
+      }`}
       onClick={handleSubscribe}
     >
       {isLoading && (
         <span className="loading loading-spinner loading-xs"></span>
       )}
-      Subscribe
+      {text || "Subscribe"}
     </button>
   );
 };
