@@ -32,9 +32,7 @@ const ButtonCheckout = ({ text, extraStyles }) => {
 
   return (
     <button
-      className={`btn bg-[#5DA2D5] hover:bg-[#5294c6] text-white ${
-        extraStyles ? extraStyles : ""
-      }`}
+      className={`btn text-white ${extraStyles ? extraStyles : ""}`}
       onClick={handleSubscribe}
     >
       {isLoading && (

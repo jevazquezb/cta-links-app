@@ -93,7 +93,11 @@ export default function Dashboard() {
     <div className="min-h-screen bg-[#ECECEC] text-gray-800">
       <header className="bg-white shadow-md">
         <div className="flex justify-between items-center p-6 max-w-5xl mx-auto">
-          {user?.isPro ? <ButtonPortal /> : <ButtonCheckout />}
+          {user?.isPro ? (
+            <ButtonPortal />
+          ) : (
+            <ButtonCheckout extraStyles="bg-[#5DA2D5] hover:bg-[#5294c6]" />
+          )}
           <ButtonLogout />
         </div>
       </header>
