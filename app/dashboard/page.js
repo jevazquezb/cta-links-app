@@ -99,6 +99,13 @@ export default function Dashboard() {
       </header>
 
       <main className="max-w-5xl mx-auto px-6 py-10">
+        {!user?.isPro && (
+          <p className="text-gray-500 italic mb-4 text-center">
+            You have {3 - (user?.links?.length ?? 0)} link
+            {3 - (user?.links?.length ?? 0) !== 1 ? "s" : ""} left.
+          </p>
+        )}
+
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-xl font-semibold">
             {user?.links?.length ?? 0} CTA link
